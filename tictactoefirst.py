@@ -3,7 +3,7 @@ import turtle as t
 t.tracer(0)
 t.hideturtle()
 
-# turn = "X" or "O"
+turn = "X" #initial turn????
 
 def line(start,end):
     t.penup()
@@ -91,63 +91,36 @@ def hit(x:float, y:float):
         square = 'South'
     elif 100<x<300 and -300<y<-100:
         square = 'Southeast'
-    else:
-        return None
+    return square
     
 
 def drawX (sq:str):
     t.color('blue')
     t.pensize(10)
-    if sq =='Northwest':
-        x,y = -250, 250
-    elif sq == 'North':
-         x,y = 0, 250
-    elif sq == 'Northeast':
-         x,y = 250, 250
-    elif sq == 'West':
-         x,y = -250, 0
-    elif sq == 'Center':
-         x,y = 0, 0
-    elif sq == 'East':
-         x,y = 250, 0
-    elif sq == 'Southwest':
-         x,y = -250, -250
-    elif sq == 'South':
-         x,y = 0,-250
-    elif sq == 'Southeast':
-         x,y = 250, -250
-    else:
-        x,y = None
+    x,y=square_to_point(sq)
     line(x - 50, y- 50, x + 50, y + 50)
     line(x- 50, y + 50, x + 50, y- 50)
 
 def drawO (sq:str):
     t.color('red')
     t.pensize(10)
-    if sq =='Northwest':
-        x,y = -250, 250
-    elif sq == 'North':
-         x,y = 0, 250
-    elif sq == 'Northeast':
-         x,y = 250, 250
-    elif sq == 'West':
-         x,y = -250, 0
-    elif sq == 'Center':
-         x,y = 0, 0
-    elif sq == 'East':
-         x,y = 250, 0
-    elif sq == 'Southwest':
-         x,y = -250, -250
-    elif sq == 'South':
-         x,y = 0,-250
-    elif sq == 'Southeast':
-         x,y = 250, -250
-    else:
-        x,y = None
+    x,y = square_to_point(sq)
     circle(50, x, y)
 
+
+def turnX():
+    if turn == "X":
+        t.getcanvas().config(cursor="X_cursor")
+
+def turnO():
+    if turn == "O":
+        t.getcanvas().config(cursor="circle")
+
 def mouseclick(x:float,y:float):
-    t.onscreenclick(point_to_square)
+    what_square = point_to_square(x,y)
+    # if what_square is not None:
+        # draw_shape()
+
     
     
 
